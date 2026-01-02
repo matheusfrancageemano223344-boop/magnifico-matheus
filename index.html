@@ -73,7 +73,7 @@ button:hover {
 <body>
 
 <div class="card" id="conteudo">
-  <h1>👑 Pergunta Importantíssima 👑</h1>
+  <h1> Pergunta Importantíssima </h1>
   <p><strong>Larissa</strong>, você tem vontade de conhecer o <strong>Magnífico Matheus</strong>?</p>
 
   <button class="sim" onclick="mostrarCurriculo()">SIM</button>
@@ -104,27 +104,27 @@ function mostrarCurriculo() {
   document.getElementById("conteudo").innerHTML = `
     <h1>📜 Currículo apresentado à ilustre Larissa</h1>
 
-    <p><strong>Nome:</strong> Matheus (Batman 🦇)</p>
+    <p><strong>Nome:</strong> Matheus (Super Matheus 🦇)</p>
     <p><strong>Idade:</strong> 21 anos</p>
     <p><strong>Cidade:</strong> Cariacica – ES (melhor município)</p>
 
-    <h3>✝️ Formação Espiritual</h3>
+    <h3> Formação Espiritual</h3>
     <p>Católico, de berço</p>
     <p>Frequentador ativo da Igreja</p>
 
-    <h3>🎓 Formação Acadêmica</h3>
+    <h3> Formação Acadêmica</h3>
     <p>Engenharia Mecânica – UFES (cursando)</p>
 
-    <h3>💪 Pontos Positivos</h3>
+    <h3> Pontos Positivos</h3>
     <p>Responsável • Dedicado • Leal • Bom ouvinte • Focado</p>
 
-    <h3>⚽ Estilo de Vida</h3>
+    <h3> Estilo de Vida</h3>
     <p>Sinuca • Baralho • Bisca</p>
     <p>Futsal e Vôlei</p>
 
-    <h3>💌 Objetivo</h3>
+    <h3> Objetivo</h3>
     <p><strong>Agradar a nobre dama Larissa</strong>, joia rara entre mortais,
-    cuja presença transforma qualquer conversa simples em um momento memorável 👑✨</p>
+    cuja presença transforma qualquer conversa simples em um momento memorável </p>
 
     <button class="sim" onclick="conviteFinal()">Se gostou, clique aqui 😌</button>
   `;
@@ -134,10 +134,9 @@ function conviteFinal() {
   criarConfete(30);
 
   document.getElementById("conteudo").innerHTML = `
-    <h1>☀️ Convite Oficial ☀️</h1>
+    <h1> Convite Oficial </h1>
     <p><strong>Larissa, aceita jogar dominó na praça com os velhos?</strong></p>
-    <p>(Prometo respeitar as regras não escritas do dominó 🧓🎲)</p>
-
+    
     <button class="sim" onclick="aceitou()">SIM</button>
     <button class="nao" onclick="negou()">NÃO</button>
   `;
@@ -152,9 +151,6 @@ function aceitou() {
   document.getElementById("conteudo").innerHTML = `
     <h1>🎶 MOMENTO HISTÓRICO 🎶</h1>
     <p>Larissa aceitou.</p>
-    <p>O sax invisível começa a tocar 🎷</p>
-    <p>Os velhos da praça estão orgulhosos.</p>
-    <p>Confete sincronizado ativado ✨</p>
   `;
 }
 
