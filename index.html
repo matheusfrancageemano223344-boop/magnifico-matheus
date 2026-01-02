@@ -80,7 +80,6 @@ button:hover {
   <button class="nao" onclick="respostaErrada()">NÃO</button>
 </div>
 
-<!-- SOM DE SUCESSO / ERRO -->
 <audio id="somSucesso">
   <source src="https://www.myinstants.com/media/sounds/tada.mp3">
 </audio>
@@ -89,14 +88,7 @@ button:hover {
   <source src="https://www.myinstants.com/media/sounds/windows-error.mp3">
 </audio>
 
-<!-- MÚSICA INSTRUMENTAL (vibe Careless Whisper) -->
-<audio id="musicaRomantica" loop crossorigin="anonymous">
-  <source src="https://cdn.pixabay.com/audio/2023/03/27/audio_5b5c6d7a94.mp3">
-</audio>
-
 <script>
-let audioContext, analyser, source, dataArray;
-
 function mostrarCurriculo() {
   document.getElementById("somSucesso").play();
   criarConfete(40);
@@ -124,7 +116,7 @@ function mostrarCurriculo() {
 
     <h3> Objetivo</h3>
     <p><strong>Agradar a nobre dama Larissa</strong>, joia rara entre mortais,
-    cuja presença transforma qualquer conversa simples em um momento memorável </p>
+    cuja presença transforma qualquer conversa simples em um momento memorável</p>
 
     <button class="sim" onclick="conviteFinal()">Se gostou, clique aqui 😌</button>
   `;
@@ -143,14 +135,12 @@ function conviteFinal() {
 }
 
 function aceitou() {
-  const musica = document.getElementById("musicaRomantica");
-  musica.play();
-
-  iniciarAnaliseAudio();
+  criarConfete(60);
 
   document.getElementById("conteudo").innerHTML = `
-    <h1>🎶 MOMENTO HISTÓRICO 🎶</h1>
+    <h1>🎉 MOMENTO HISTÓRICO 🎉</h1>
     <p>Larissa aceitou.</p>
+    <p>Os velhos da praça estão em êxtase.</p>
   `;
 }
 
@@ -183,35 +173,7 @@ function criarConfete(qtd) {
     setTimeout(() => c.remove(), 4000);
   }
 }
-
-/* ===== SINCRONIZAÇÃO COM MÚSICA ===== */
-function iniciarAnaliseAudio() {
-  audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  analyser = audioContext.createAnalyser();
-  analyser.fftSize = 256;
-
-  const audio = document.getElementById("musicaRomantica");
-  source = audioContext.createMediaElementSource(audio);
-  source.connect(analyser);
-  analyser.connect(audioContext.destination);
-
-  dataArray = new Uint8Array(analyser.frequencyBinCount);
-  detectarBatida();
-}
-
-function detectarBatida() {
-  analyser.getByteFrequencyData(dataArray);
-
-  let media = dataArray.reduce((a,b)=>a+b,0)/dataArray.length;
-
-  if (media > 85) {
-    criarConfete(10);
-  }
-
-  requestAnimationFrame(detectarBatida);
-}
 </script>
 
 </body>
 </html>
-
