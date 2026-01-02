@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>O Magnífico Matheus</title>
+
+<style>
+  body {
+    font-family: 'Trebuchet MS', sans-serif;
+    background: radial-gradient(circle at top, #2b2b45, #0f0f1a);
+    color: #fff;
+    text-align: center;
+    padding: 40px;
+    overflow-x: hidden;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 35px;
+    max-width: 650px;
+    margin: auto;
+    box-shadow: 0 0 25px rgba(255,255,255,0.15);
+    animation: fadeIn 1s ease;
+  }
+
+  h1 {
+    font-size: 2.2em;
+    margin-bottom: 10px;
+  }
+
+  button {
+    padding: 14px 30px;
+    margin: 12px;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 15px rgba(255,255,255,0.4);
+  }
+
+  .sim {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: #fff;
+  }
+
+  .nao {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: #fff;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .confete {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: gold;
+    animation: cair 3s linear infinite;
+  }
+
+  @keyframes cair {
+    0% { transform: translateY(-10px) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="conteudo">
+  <h1>👑 Pergunta de Alto Nível 👑</h1>
+  <p>Você tem vontade de conhecer o <strong>Magnífico Matheus</strong>?</p>
+
+  <button class="sim" onclick="mostrarCurriculo()">SIM</button>
+  <button class="nao" onclick="respostaErrada()">NÃO</button>
+</div>
+
+<!-- SOM -->
+<audio id="somSucesso">
+  <source src="https://www.myinstants.com/media/sounds/tada.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="somErro">
+  <source src="https://www.myinstants.com/media/sounds/windows-error.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function mostrarCurriculo() {
+  document.getElementById("somSucesso").play();
+  criarConfete();
+
+  document.getElementById("conteudo").innerHTML = `
+    <h1>📜 Currículo do Magnífico</h1>
+
+    <p><strong>Nome:</strong> Matheus (Batman 🦇)</p>
+    <p><strong>Idade:</strong> 21 anos</p>
+    <p><strong>Cidade:</strong> Cariacica – ES (melhor município)</p>
+
+    <h3>✝️ Formação Espiritual</h3>
+    <p>Católico, de berço</p>
+    <p>Frequentador ativo da Igreja</p>
+
+    <h3>🎓 Formação Acadêmica</h3>
+    <p>Engenharia Mecânica – UFES (cursando)</p>
+
+    <h3>💪 Pontos Positivos</h3>
+    <p>Responsável • Dedicado • Leal • Bom ouvinte • Focado</p>
+
+    <h3>⚽ Estilo de Vida</h3>
+    <p>Sinuca • Baralho • Bisca</p>
+    <p>Futsal e Vôlei</p>
+
+    <h3>💌 Objetivo</h3>
+    <p><strong>Agradar a nobre dama</strong>, entidade de beleza rara,
+    cuja presença transforma qualquer dia comum em evento memorável 👑✨</p>
+  `;
+}
+
+function respostaErrada() {
+  document.getElementById("somErro").play();
+
+  document.getElementById("conteudo").innerHTML = `
+    <h1>❌ RESPOSTA ERRADA</h1>
+    <p>Claramente houve um equívoco.</p>
+    <p>Reavalie suas escolhas.</p>
+    <button class="sim" onclick="location.reload()">Tentar novamente</button>
+  `;
+}
+
+function criarConfete() {
+  for (let i = 0; i < 80; i++) {
+    let confete = document.createElement("div");
+    confete.className = "confete";
+    confete.style.left = Math.random() * 100 + "vw";
+    confete.style.background = `hsl(${Math.random()*360}, 100%, 50%)`;
+    confete.style.animationDuration = (Math.random() * 2 + 2) + "s";
+    document.body.appendChild(confete);
+
+    setTimeout(() => confete.remove(), 3000);
+  }
+}
+</script>
+
+</body>
+</html>
