@@ -5,101 +5,104 @@
 <title>O Magnífico Matheus</title>
 
 <style>
-  body {
-    font-family: 'Trebuchet MS', sans-serif;
-    background: radial-gradient(circle at top, #2b2b45, #0f0f1a);
-    color: #fff;
-    text-align: center;
-    padding: 40px;
-    overflow-x: hidden;
-  }
+body {
+  font-family: 'Trebuchet MS', sans-serif;
+  background: radial-gradient(circle at top, #2b2b45, #0f0f1a);
+  color: #fff;
+  text-align: center;
+  padding: 40px;
+  overflow-x: hidden;
+}
 
-  .card {
-    background: rgba(255,255,255,0.12);
-    border-radius: 20px;
-    padding: 35px;
-    max-width: 650px;
-    margin: auto;
-    box-shadow: 0 0 25px rgba(255,255,255,0.15);
-    animation: fadeIn 1s ease;
-  }
+.card {
+  background: rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 35px;
+  max-width: 700px;
+  margin: auto;
+  box-shadow: 0 0 25px rgba(255,255,255,0.15);
+  animation: fadeIn 1s ease;
+}
 
-  h1 {
-    font-size: 2.2em;
-    margin-bottom: 10px;
-  }
+button {
+  padding: 14px 30px;
+  margin: 12px;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
 
-  button {
-    padding: 14px 30px;
-    margin: 12px;
-    border: none;
-    border-radius: 12px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
+button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
 
-  button:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 15px rgba(255,255,255,0.4);
-  }
+.sim {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: #fff;
+}
 
-  .sim {
-    background: linear-gradient(135deg, #2ecc71, #27ae60);
-    color: #fff;
-  }
+.nao {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: #fff;
+}
 
-  .nao {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
-    color: #fff;
-  }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(25px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+.confete {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: cair linear;
+}
 
-  .confete {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    background: gold;
-    animation: cair 3s linear infinite;
+@keyframes cair {
+  to {
+    transform: translateY(110vh) rotate(720deg);
   }
-
-  @keyframes cair {
-    0% { transform: translateY(-10px) rotate(0deg); }
-    100% { transform: translateY(110vh) rotate(360deg); }
-  }
+}
 </style>
 </head>
 
 <body>
 
 <div class="card" id="conteudo">
-  <h1>👑 Pergunta de Alto Nível 👑</h1>
-  <p>Você tem vontade de conhecer o <strong>Magnífico Matheus</strong>?</p>
+  <h1>👑 Pergunta Importantíssima 👑</h1>
+  <p><strong>Larissa</strong>, você tem vontade de conhecer o <strong>Magnífico Matheus</strong>?</p>
 
   <button class="sim" onclick="mostrarCurriculo()">SIM</button>
   <button class="nao" onclick="respostaErrada()">NÃO</button>
 </div>
 
-<!-- SOM -->
+<!-- SOM DE SUCESSO / ERRO -->
 <audio id="somSucesso">
-  <source src="https://www.myinstants.com/media/sounds/tada.mp3" type="audio/mpeg">
+  <source src="https://www.myinstants.com/media/sounds/tada.mp3">
 </audio>
 
 <audio id="somErro">
-  <source src="https://www.myinstants.com/media/sounds/windows-error.mp3" type="audio/mpeg">
+  <source src="https://www.myinstants.com/media/sounds/windows-error.mp3">
+</audio>
+
+<!-- MÚSICA INSTRUMENTAL (vibe Careless Whisper) -->
+<audio id="musicaRomantica" loop crossorigin="anonymous">
+  <source src="https://cdn.pixabay.com/audio/2023/03/27/audio_5b5c6d7a94.mp3">
 </audio>
 
 <script>
+let audioContext, analyser, source, dataArray;
+
 function mostrarCurriculo() {
   document.getElementById("somSucesso").play();
-  criarConfete();
+  criarConfete(40);
 
   document.getElementById("conteudo").innerHTML = `
-    <h1>📜 Currículo do Magnífico</h1>
+    <h1>📜 Currículo apresentado à ilustre Larissa</h1>
 
     <p><strong>Nome:</strong> Matheus (Batman 🦇)</p>
     <p><strong>Idade:</strong> 21 anos</p>
@@ -120,8 +123,46 @@ function mostrarCurriculo() {
     <p>Futsal e Vôlei</p>
 
     <h3>💌 Objetivo</h3>
-    <p><strong>Agradar a nobre dama</strong>, entidade de beleza rara,
-    cuja presença transforma qualquer dia comum em evento memorável 👑✨</p>
+    <p><strong>Agradar a nobre dama Larissa</strong>, joia rara entre mortais,
+    cuja presença transforma qualquer conversa simples em um momento memorável 👑✨</p>
+
+    <button class="sim" onclick="conviteFinal()">Se gostou, clique aqui 😌</button>
+  `;
+}
+
+function conviteFinal() {
+  criarConfete(30);
+
+  document.getElementById("conteudo").innerHTML = `
+    <h1>☀️ Convite Oficial ☀️</h1>
+    <p><strong>Larissa, aceita jogar dominó na praça com os velhos?</strong></p>
+    <p>(Prometo respeitar as regras não escritas do dominó 🧓🎲)</p>
+
+    <button class="sim" onclick="aceitou()">SIM</button>
+    <button class="nao" onclick="negou()">NÃO</button>
+  `;
+}
+
+function aceitou() {
+  const musica = document.getElementById("musicaRomantica");
+  musica.play();
+
+  iniciarAnaliseAudio();
+
+  document.getElementById("conteudo").innerHTML = `
+    <h1>🎶 MOMENTO HISTÓRICO 🎶</h1>
+    <p>Larissa aceitou.</p>
+    <p>O sax invisível começa a tocar 🎷</p>
+    <p>Os velhos da praça estão orgulhosos.</p>
+    <p>Confete sincronizado ativado ✨</p>
+  `;
+}
+
+function negou() {
+  document.getElementById("conteudo").innerHTML = `
+    <h1>😮 ESCOLHA QUESTIONÁVEL</h1>
+    <p>Os velhos ficaram tristes.</p>
+    <button class="sim" onclick="conviteFinal()">Reconsiderar</button>
   `;
 }
 
@@ -129,26 +170,52 @@ function respostaErrada() {
   document.getElementById("somErro").play();
 
   document.getElementById("conteudo").innerHTML = `
-    <h1>❌ RESPOSTA ERRADA</h1>
-    <p>Claramente houve um equívoco.</p>
-    <p>Reavalie suas escolhas.</p>
+    <h1>❌ Resposta Errada</h1>
+    <p>Claramente houve um equívoco, Larissa.</p>
     <button class="sim" onclick="location.reload()">Tentar novamente</button>
   `;
 }
 
-function criarConfete() {
-  for (let i = 0; i < 80; i++) {
-    let confete = document.createElement("div");
-    confete.className = "confete";
-    confete.style.left = Math.random() * 100 + "vw";
-    confete.style.background = `hsl(${Math.random()*360}, 100%, 50%)`;
-    confete.style.animationDuration = (Math.random() * 2 + 2) + "s";
-    document.body.appendChild(confete);
-
-    setTimeout(() => confete.remove(), 3000);
+function criarConfete(qtd) {
+  for (let i = 0; i < qtd; i++) {
+    let c = document.createElement("div");
+    c.className = "confete";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.background = `hsl(${Math.random()*360},100%,50%)`;
+    c.style.animationDuration = (Math.random()*2 + 2) + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 4000);
   }
+}
+
+/* ===== SINCRONIZAÇÃO COM MÚSICA ===== */
+function iniciarAnaliseAudio() {
+  audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  analyser = audioContext.createAnalyser();
+  analyser.fftSize = 256;
+
+  const audio = document.getElementById("musicaRomantica");
+  source = audioContext.createMediaElementSource(audio);
+  source.connect(analyser);
+  analyser.connect(audioContext.destination);
+
+  dataArray = new Uint8Array(analyser.frequencyBinCount);
+  detectarBatida();
+}
+
+function detectarBatida() {
+  analyser.getByteFrequencyData(dataArray);
+
+  let media = dataArray.reduce((a,b)=>a+b,0)/dataArray.length;
+
+  if (media > 85) {
+    criarConfete(10);
+  }
+
+  requestAnimationFrame(detectarBatida);
 }
 </script>
 
 </body>
 </html>
+
